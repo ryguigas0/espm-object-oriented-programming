@@ -1,3 +1,7 @@
+# vscode settings
+.vscode/**
+.code-workspace
+
 # Compiled files
 bin/**
 *.class
