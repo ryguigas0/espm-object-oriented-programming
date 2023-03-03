@@ -1,5 +1,7 @@
 # Aula 1
+
 ## Comparando Strings
+
 ```java
 String a = "String";
 
@@ -19,6 +21,7 @@ c = c + "ing";
 ```
 
 ## Sobrescrevendo métodos
+
 ```java
     @Override // -> Sobrescreva o método abaixo (prof1.equals(obj))
     public boolean equals(Object obj) {
@@ -32,6 +35,7 @@ c = c + "ing";
 ```
 
 ## Lista x Sets
+
 ```java
     // Sets não repetem elementos
     Set<Integer> set = new HashSet<Integer>();
