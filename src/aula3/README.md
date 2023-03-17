@@ -97,6 +97,19 @@ public class Main{
 }
 ```
 
+## `final`
+
+```java
+// Cliente.java
+public final class Cliente { // Classe final -> NÃO PODE SER HERDADA
+    public final String id; // Variável / Atributo final -> NÃO PODE SER ALTERADO (CONSTANTE)
+    public final void metodoImportante(){ // Método final -> NÃO PODE SER SOBRESCRITO
+        // ...
+    }
+    // ...
+}
+```
+
 ## BÔNUS
 
 ### `for each`
