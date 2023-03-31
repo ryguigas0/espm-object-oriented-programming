@@ -29,8 +29,17 @@ public abstract class Cliente {
         return contas;
     }
 
-    public void setContas(List<Conta> contas) {
-        this.contas = contas;
+    public void addConta(Conta conta) {
+        this.contas.add(conta);
+    }
+
+    public Conta findConta(String numeroConta){
+        for (Conta conta : this.contas) {
+            if (conta.getNumero().equals(numeroConta)) {
+                return conta;
+            }
+        }
+        return null;
     }
 
 }

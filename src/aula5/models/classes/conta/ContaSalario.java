@@ -7,9 +7,10 @@ public class ContaSalario extends Conta implements ContaComRestricao {
     double limiteSaque;
     double limiteDeposito;
 
-    public ContaSalario(String agencia, double limiteSaque) {
+    public ContaSalario(String agencia, double limiteDeposito, double limiteSaque) {
         super(agencia);
 
+        this.limiteDeposito = limiteDeposito;
         this.limiteSaque = limiteSaque;
     }
 

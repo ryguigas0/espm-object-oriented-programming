@@ -9,13 +9,17 @@ public abstract class Conta {
     private String numero;
     private double saldo = 0.0;
 
-    public Conta(String agencia) {
+    public Conta(String id, String agencia, String numero) {
+        this.id = id;
         this.agencia = agencia;
-        this.id = UUID.randomUUID().toString();
-        this.numero = gerarNumeroConta();
+        this.numero = numero;
     }
 
-    private String gerarNumeroConta() {
+    public Conta(String agencia) {
+        this(UUID.randomUUID().toString(), agencia, gerarNumeroConta());
+    }
+
+    private static String gerarNumeroConta() {
         Random r = new Random();
 
         String output = "";
@@ -58,5 +62,4 @@ public abstract class Conta {
     public String getNumero() {
         return numero;
     }
-
 }

@@ -6,6 +6,10 @@ import aula5.models.classes.banco.Banco;
 import aula5.models.classes.cliente.Cliente;
 import aula5.models.classes.cliente.PessoaFisica;
 import aula5.models.classes.cliente.PessoaJuridica;
+import aula5.models.classes.conta.Conta;
+import aula5.models.classes.conta.ContaCorrente;
+import aula5.models.classes.conta.ContaPoupanca;
+import aula5.models.classes.conta.ContaSalario;
 
 public class Sistema {
 
@@ -47,28 +51,39 @@ public class Sistema {
                         System.out.println("new customer -> Cria um novo cliente");
                         System.out.println("list customer -> Lista os clientes cadastrados");
                         System.out.println("use customer -> Seleciona um cliente para fazer operações");
+                        System.out.println("add conta -> Operação de adicionar conta de cliente");
+                        System.out.println("list conta -> Operação de listar as contas de um cliente");
+                        System.out.println("deposit conta -> Operação de depositar saldo de uma conta do cliente");
+                        System.out.println("withdraw conta -> Operação de sacar saldo de uma conta do cliente");
                         break;
                     case "exit":
                         System.out.println("Finalizando...");
                         alive = false;
                         break;
                     case "new customer":
-                        addCustomer();
+                        addCliente();
                         break;
                     case "list customer":
-                        listCustomers();
+                        listClientes();
                         break;
                     case "use customer":
-                        selectCustomers();
+                        selectClientes();
                         break;
                     case "add conta":
-                        if (clienteSelecionado == null) {
-                            throw new RuntimeException("Nenhum cliente foi selecionado!");
-                        }
                         addConta();
                         break;
+                    case "list conta":
+                        listContas();
+                        break;
+                    case "deposit conta":
+                        depositarConta();
+                        break;
+                    case "withdraw conta":
+                        // sacarConta();
+                        throw new RuntimeException("Comando não implementado!");
+                    // break;
                     default:
-                        System.out.println("Comando não conhecido!");
+                        System.out.println("Comando não conhecido! Digite 'help' para mostrar todos os comandos");
                         break;
                 }
             } catch (Exception e) {
@@ -77,11 +92,68 @@ public class Sistema {
         } while (alive);
     }
 
-    private void addConta() {
-        //TODO: Acabar implementação do método
+    private void depositarConta() {
+        System.out.print("Digite o numero da conta: ");
+        String numeroConta = kb.nextLine().trim();
+
+        Conta conta = clienteSelecionado.findConta(numeroConta);
+
+        if (conta == null) {
+            throw new RuntimeException("Conta não foi encontrada!");
+        }
+
+        System.out.print("Digite o valor para depositar: R$");
+        double depoisto = kb.nextDouble();
+
+        conta.depositar(depoisto);
     }
 
-    private void selectCustomers() {
+    private void addConta() {
+        if (clienteSelecionado == null) {
+            throw new RuntimeException("Nenhum cliente foi selecionado!");
+        }
+
+        System.out.print("A conta é do tipo Corrente, Poupanca ou Salario? [C/P/S] ");
+        String tipoConta = kb.nextLine().toLowerCase().trim();
+
+        Conta novaConta = null;
+        String numAgencia = banco.getAgencia();
+
+        if (tipoConta.equals("c")) {
+            novaConta = new ContaCorrente(numAgencia);
+        } else if (tipoConta.equals("p")) {
+            novaConta = new ContaPoupanca(numAgencia);
+        } else if (tipoConta.equals("s")) {
+            novaConta = new ContaSalario(numAgencia, 1000.0, 1000.0);
+        } else {
+            throw new RuntimeException("Opção de conta inválida!");
+        }
+
+        clienteSelecionado.addConta(novaConta);
+    }
+
+    private void listContas() {
+        if (clienteSelecionado == null) {
+            throw new RuntimeException("Nenhum cliente foi selecionado!");
+        }
+        System.out.println("AGENCIA - NUMERO - SALDO - LIMITE");
+        String output = "";
+        for (Conta conta : clienteSelecionado.getContas()) {
+            if (conta instanceof ContaCorrente cc) {
+                output = String.format("%s - %s - %s - R$%.2f", cc.getAgencia(),
+                        cc.getNumero(), cc.getSaldo(), cc.getLimite());
+            } else if (conta instanceof ContaPoupanca cp) {
+                output = String.format("%s - %s - %s - R$%.2f", cp.getAgencia(),
+                        cp.getNumero(), cp.getSaldo(), cp.getLimite());
+            } else if (conta instanceof ContaSalario cs) {
+                output = String.format("%s - %s - %s - Saque: R$%.2f / Deposito: R$%.2f", cs.getAgencia(),
+                        cs.getNumero(), cs.getSaldo(), cs.getLimiteSaque(), cs.getLimiteDeposito());
+            }
+        }
+        System.out.println(output);
+    }
+
+    private void selectClientes() {
         System.out.print("Digite o id do cliente: ");
         String id = kb.nextLine().trim();
         if (banco.getClientes().containsKey(id)) {
@@ -91,7 +163,7 @@ public class Sistema {
         }
     }
 
-    private void addCustomer() {
+    private void addCliente() {
         System.out.print("Cliente físico ou jurídico? [F/J] ");
         String input = kb.nextLine().toLowerCase();
         String nome = "";
@@ -117,7 +189,7 @@ public class Sistema {
         }
     }
 
-    private void listCustomers() {
+    private void listClientes() {
         System.out.println("ID - NOME - CPF/CNPJ");
         banco.getClientes().forEach((id, cliente) -> {
             if (cliente instanceof PessoaFisica pf) {
