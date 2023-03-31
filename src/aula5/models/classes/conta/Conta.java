@@ -1,4 +1,4 @@
-package aula5;
+package aula5.models.classes.conta;
 
 import java.util.Random;
 import java.util.UUID;

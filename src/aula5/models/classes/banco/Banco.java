@@ -1,8 +1,10 @@
-package aula5;
+package aula5.models.classes.banco;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import aula5.models.classes.cliente.Cliente;
 
 public class Banco {
 

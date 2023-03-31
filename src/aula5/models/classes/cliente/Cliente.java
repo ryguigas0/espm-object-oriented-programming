@@ -1,8 +1,10 @@
-package aula5;
+package aula5.models.classes.cliente;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import aula5.models.classes.conta.Conta;
 
 public abstract class Cliente {
 

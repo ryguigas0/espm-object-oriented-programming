@@ -1,4 +1,4 @@
-package aula5;
+package aula5.models.classes.cliente;
 
 public class PessoaJuridica extends Cliente {
     private String cnpj;

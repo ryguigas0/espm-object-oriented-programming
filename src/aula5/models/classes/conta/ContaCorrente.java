@@ -1,10 +1,12 @@
-package aula5;
+package aula5.models.classes.conta;
 
-public class ContaPoupanca extends Conta implements ContaComLimite {
+import aula5.models.interfaces.conta.ContaComLimite;
+
+public class ContaCorrente extends Conta implements ContaComLimite {
 
     private double limite;
 
-    public ContaPoupanca(String agencia) {
+    public ContaCorrente(String agencia) {
         super(agencia);
     }
 
@@ -17,4 +19,5 @@ public class ContaPoupanca extends Conta implements ContaComLimite {
     public void setLimite(double valor) {
         this.limite = valor;
     }
+
 }

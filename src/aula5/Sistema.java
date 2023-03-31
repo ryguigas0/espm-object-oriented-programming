@@ -2,6 +2,11 @@ package aula5;
 
 import java.util.Scanner;
 
+import aula5.models.classes.banco.Banco;
+import aula5.models.classes.cliente.Cliente;
+import aula5.models.classes.cliente.PessoaFisica;
+import aula5.models.classes.cliente.PessoaJuridica;
+
 public class Sistema {
 
     private Scanner kb = new Scanner(System.in);
@@ -97,7 +102,7 @@ public class Sistema {
                 System.out.print("Digite o CPF da pessoa física: ");
                 String cpf = kb.nextLine();
                 PessoaFisica pf = new PessoaFisica(nome, cpf);
-                banco.getClientes().put(pf.id, pf);
+                banco.getClientes().put(pf.getId(), pf);
                 break;
             case "j":
                 System.out.print("Digite o nome da pessoa jurídica: ");
@@ -105,7 +110,7 @@ public class Sistema {
                 System.out.print("Digite o CNPJ da pessoa jurídica: ");
                 String cnpj = kb.nextLine();
                 PessoaFisica pj = new PessoaFisica(nome, cnpj);
-                banco.getClientes().put(pj.id, pj);
+                banco.getClientes().put(pj.getId(), pj);
                 break;
             default:
                 throw new RuntimeException("Entrada de dado inválida");
@@ -116,9 +121,9 @@ public class Sistema {
         System.out.println("ID - NOME - CPF/CNPJ");
         banco.getClientes().forEach((id, cliente) -> {
             if (cliente instanceof PessoaFisica pf) {
-                System.out.println(cliente.id + " - " + cliente.nome + " - " + pf.getCpf());
+                System.out.println(cliente.getId() + " - " + cliente.getNome() + " - " + pf.getCpf());
             } else if (cliente instanceof PessoaJuridica pj) {
-                System.out.println(cliente.id + " - " + cliente.nome + " - " + pj.getCnpj());
+                System.out.println(cliente.getId() + " - " + cliente.getNome() + " - " + pj.getCnpj());
             }
         });
     }

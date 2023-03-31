@@ -1,4 +1,4 @@
-package aula5;
+package aula5.models.classes.cliente;
 
 public class PessoaFisica extends Cliente {
 

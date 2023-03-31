@@ -1,4 +1,4 @@
-package aula5;
+package aula5.models.interfaces.conta;
 
 public interface ContaComLimite {
     public double getLimite();
