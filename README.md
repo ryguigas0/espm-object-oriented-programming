@@ -2,6 +2,10 @@
 
 Repositório da matéria de Programação Orientada a Objetos e Spring Boot da ESPM
 
+## Exercício em repositórios externos
+
+- [Exercício 1](https://github.com/ryguigas0/oop-exercicio1-espm)
+
 ## Ferramentas usadas
 
 - [WSL2](https://docs.microsoft.com/pt-br/windows/wsl/about): rodar linux com
